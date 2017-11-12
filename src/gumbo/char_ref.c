@@ -23013,6 +23013,7 @@ _again:
     if (last_char == ';') {
       bool matched = utf8iterator_maybe_consume_match(input, start, len, true);
       assert(matched);
+      (void)matched;
       return true;
     } else if (is_in_attribute && (*te == '=' || isalnum(*te))) {
       output->first = kGumboNoChar;
@@ -23027,6 +23028,7 @@ _again:
           parser, input, GUMBO_ERR_NAMED_CHAR_REF_WITHOUT_SEMICOLON, bad_ref);
       bool matched = utf8iterator_maybe_consume_match(input, start, len, true);
       assert(matched);
+      (void)matched;
       return false;
     }
   } else {

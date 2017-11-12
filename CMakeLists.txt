@@ -60,7 +60,7 @@ set(SOURCE_GUMBO    src/gumbo/attribute.c
 
 add_library(litehtml SHARED ${SOURCE_LITEHTML} ${SOURCE_GUMBO})
 
-set(CMAKE_C_FLAGS "-fPIC -fshort-wchar -ffreestanding -fno-stack-protector -maccumulate-outgoing-args -Wall -Werror -m64 -mno-red-zone")
+set(CMAKE_C_FLAGS "-nostdlib -fPIC -fshort-wchar -ffreestanding -fno-stack-protector -maccumulate-outgoing-args -Wall -Werror -m64 -mno-red-zone")
 set(CMAKE_CXX_FLAGS "${CMAKE_C_FLAGS}")
-set(CMAKE_EXE_LINKER_FLAGS "-T elf_efi.lds -Bsymbolic -shared -nostdlib -znocombreloc")
+set(CMAKE_SHARED_LINKER_FLAGS "-T elf_efi.lds -Bsymbolic -shared -nostdlib -znocombreloc")
 

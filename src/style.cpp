@@ -6,6 +6,12 @@
 #include <locale>
 #endif
 
+// I'm pretty sure you're not supposed to do this... time will tell if it works...
+extern "C"
+{
+void *__dso_handle = NULL;
+}
+
 litehtml::string_map litehtml::style::m_valid_values =
 {
 	{ _t("white-space"), white_space_strings }
