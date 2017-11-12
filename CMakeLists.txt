@@ -7,14 +7,6 @@ if (NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
     set(CMAKE_BUILD_TYPE "Release")
 endif()
 
-if(NOT MSVC)
-	set(CMAKE_CXX_FLAGS "-std=c++11")
-	set(CMAKE_CXX_FLAGS_DEBUG "-O0 -DDEBUG -g")
-	set(CMAKE_C_FLAGS_DEBUG "-std=c99 -O0 -DDEBUG -g")
-	set(CMAKE_CXX_FLAGS_RELEASE "-O3")
-	set(CMAKE_C_FLAGS_RELEASE "-std=c99 -O3")
-endif()
-
 set(SOURCE_LITEHTML src/background.cpp
                     src/box.cpp
                     src/context.cpp
@@ -66,9 +58,9 @@ set(SOURCE_GUMBO    src/gumbo/attribute.c
                     src/gumbo/vector.c
 )
 
-add_library(litehtml STATIC ${SOURCE_LITEHTML} ${SOURCE_GUMBO})
+add_library(litehtml SHARED ${SOURCE_LITEHTML} ${SOURCE_GUMBO})
 
-if(WIN32)
-     target_include_directories(litehtml PUBLIC src/gumbo)
-endif()
+set(CMAKE_C_FLAGS "-fPIC -fshort-wchar -ffreestanding -fno-stack-protector -maccumulate-outgoing-args -Wall -Werror -m64 -mno-red-zone")
+set(CMAKE_CXX_FLAGS "${CMAKE_C_FLAGS}")
+set(CMAKE_EXE_LINKER_FLAGS "-T elf_efi.lds -Bsymbolic -shared -nostdlib -znocombreloc")
 
